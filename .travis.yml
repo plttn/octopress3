@@ -9,10 +9,10 @@ branches:
 
 before_install:
   - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-  - echo -e "$GITHUB_PRIVATE_KEY" > ~/.ssh/travis_rsa
-  - chmod 600 ~/.ssh/travis_rsa
+  - echo -e "$GITHUB_PRIVATE_KEY" > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
   - eval `ssh-agent -s`
-  - ssh-add ~/.ssh/travis_rsa
+  - ssh-add ~/.ssh/id_rsa
   - git config user.email "build@travisci.org"
   - git config user.email "Travis CI"
 
