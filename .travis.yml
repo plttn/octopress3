@@ -10,14 +10,12 @@ branches:
 before_install:
   - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - mkdir ~/deploy
-  - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFTRvx9OEGvrk3jmLkgx+6F4f57zkeYTg2ZBwJmm8uv9xTvV8oZuDlo08o+4eHPek5RbHsei3c0qDjEJvrVcxuS44asza+HvV3lxZmvCVWcHsTaRwpjPBJmtpOA4ARcBDvO5zeVp7fd4/crc4XGDxoShadJiaHPRsKxhLbx4JRS/jiooE07TvkgaPoN0jFNAVyLIqlUuKSWRElYZWd5Iz/uS2FaXEywm9bbxkS68ke9L+cIpcl3XWb0mKcXMG8ppNlnlIWvom16FvMSUo9Dv31uK7lDAGcL42C7PfEXpftV4d4ifDOvNIx7PW5kknqe6534lUllZeLyqFGX1PHptQ7 travis@travis-ci.org" > ~/deploy/travis_rsa.pub
   - echo -e "$DEPLOY_PRIVATE_KEY" > ~/deploy/travis_rsa
   - chmod 600 ~/deploy/travis_rsa*
   - eval `ssh-agent -s`
-  #- ssh-add -l
   - ssh-add ~/deploy/travis_rsa
   - git config --global user.email "build@travisci.org"
-  - git config --global user.email "Travis CI"
+  - git config --global user.name "Travis CI"
 
 script:
     - bundle exec jekyll build
