@@ -16,8 +16,8 @@ before_install:
   - eval `ssh-agent -s`
   #- ssh-add -l
   - ssh-add ~/deploy/travis_rsa
-  - git config user.email "build@travisci.org"
-  - git config user.email "Travis CI"
+  - git config --global user.email "build@travisci.org"
+  - git config --global user.email "Travis CI"
 
 script:
     - bundle exec jekyll build
