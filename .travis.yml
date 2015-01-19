@@ -3,6 +3,20 @@ cache: bundler
 
 rvm:
   - 1.9.3
+branches:
+  only:
+    - deploy
+
+before_install:
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - mkdir ~/deploy
+  - echo -e "$DEPLOY_PRIVATE_KEY" > ~/deploy/travis_rsa
+  - chmod 600 ~/deploy/travis_rsa*
+  - eval `ssh-agent -s`
+  - ssh-add ~/deploy/travis_rsa
+  - git config --global user.email "build@travisci.org"
+  - git config --global user.name "Travis CI"
 
 script:
     - bundle exec jekyll build
+    - bundle exec octopress deploy
